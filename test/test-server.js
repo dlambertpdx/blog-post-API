@@ -35,8 +35,33 @@ describe('blog posts', function() {
 			res.body.forEach(function(blogPost) {
 				expect(blogPost).to.be.a('object');
 				expect(blogPost).to.have.all.keys(
-					'id', 'title', 'content', 'author')
+					'id', 'title', 'content', 'author', 'publishDate')
 			});
-		})
+		});
 	});
+
+	it('should add blog post on POST', function() {
+		const newPost = {
+			title: 'I tried pilates for 30 days',
+			content: 'Portland tilde mixtape, hell of normcore fingerstache quinoa seitan humblebrag live-edge tumblr.', 
+			author: 'Elliot Smith'
+		};
+
+		const expectedKeys = ['id', 'publishDate'].concat(Object.keys(newPost));
+		
+		// return chai request
+		return chai.request(app);
+		.post('/blog-posts')
+		.send(newPost)
+		.then(function(res) {
+			expect(res).to.have.status(200);
+			expect(res).to.be.json;
+			expect(res.body).to.be.a('object');
+			expect(res.body).to.have.all.keys(expectedKeys);
+			expect(res.body.title).to.equal(newPost.title);
+			expect(res.body.content).to.equal(newPost.content);
+			expect(res.body.author).to.equal(newPost.author)
+		});
+	});
+	
 });
