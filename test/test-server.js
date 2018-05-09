@@ -25,7 +25,7 @@ describe('blog posts', function() {
 
 	it('should list blogs on GET', function() {
 		//return chai request
-		return chai.request(app);
+		return chai.request(app)
 		.get('/blog-posts')
 		.then(function(res) {
 			expect(res).to.have.status(200);
@@ -50,17 +50,49 @@ describe('blog posts', function() {
 		const expectedKeys = ['id', 'publishDate'].concat(Object.keys(newPost));
 		
 		// return chai request
-		return chai.request(app);
+		return chai.request(app)
 		.post('/blog-posts')
 		.send(newPost)
 		.then(function(res) {
-			expect(res).to.have.status(200);
+			expect(res).to.have.status(201);
 			expect(res).to.be.json;
 			expect(res.body).to.be.a('object');
 			expect(res.body).to.have.all.keys(expectedKeys);
 			expect(res.body.title).to.equal(newPost.title);
 			expect(res.body.content).to.equal(newPost.content);
 			expect(res.body.author).to.equal(newPost.author)
+		});
+	});
+
+	it('should update blog post on PUT', function() {
+		// return chai request for get
+		return chai.request(app)
+		.get('/blog-posts')
+		.then(function(res) {
+			const updatePost = Object.assign(res.body[0], {
+				name: 'I tried bullet journaling for 30 days',
+				content: 'Umami church-key normcore freegan pok pok snackwave truffaut selvage artisan la croix.'
+			});
+			//return chai request for put
+			return chai.request(app)
+			.put(`/blog-posts/${res.body[0].id}`)
+			.send(updatePost)
+			.then(function(res) {
+				expect(res).to.have.status(204)
+			});
+		});	
+	});
+
+	it('should delete blog post on DELETE', function() {
+		//return chai request
+		return chai.request(app)
+		.get('/blog-posts')	
+		.then(function(res) {
+			return chai.request(app)
+			.delete(`/blog-posts/${res.body[0].id}`)
+			.then(function() {
+				expect(res).to.have.status(200);
+			});
 		});
 	});
 	
