@@ -56,7 +56,8 @@ router.put('/:id', jsonParser, (req, res) => {
     id: req.params.id,
     title: req.body.title,
 		content: req.body.content,
-		author: req.body.author
+    author: req.body.author, 
+    publishDate: req.body.publishDate
   });
   res.status(204).end();
 })
