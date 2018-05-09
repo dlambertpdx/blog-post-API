@@ -1,2 +1,9 @@
 language: node_js
 node_js: node
+deploy:
+  provider: heroku
+  api_key:
+    secure: dPj9CObUjRE2BdiJhCQwVtuZvLG6DArKkBha37bRZGCp6CuTNNYlL8iQHjNuPx4KKhQToM9Td/7QWxiIDV7FBb6ytUeKoLZ1hwZAdenwsfZxo+iserxtBc4XESu16zGhRFzMU5zMSC+rbWrnkx7UQs7aAOkncF7QPczEg6XKSoi/u+kY+ydzIwmKeVbsP0MC6BW2jKlWw+p38RrMUmXxfPJ4zCTHUTkFPxg5PWu21HrJHfy0It0VXpEd3aN03Xg6D6eFeHtzuu59zHAJXzY6lQhBxrQOwilWxdF+VFOdZb8g10b4OLb8BZyecJbI8FeWB96cK9WZdDGCt5qUwFexGLksklleEXCSI5JAYZjxgoFnZD7RyFwTdZRy8XGfSwJ6HndnJnT+HutlyfKjoGtMa4shITUy18ss/b5DMbKqZvy/iCQQnwiR/HOqI003vIbFJA2AL/D4GVufW7r2roPNMmlk8nXNWMi+BpDAJAeb1x16eT/qLFMq3ZK/WN1BoMMYTyh/hpB/0WPFGkM419LSi/fI4xtdGW3c+ACT4E3oH2hqFAp2ra0S737sGkf3PfDkZIhhdgA99fmovSOa6w2Albvenz5WYJUwm8I0CaUzXwrdgQju/zZQ3DBNynrIJoIN2R6V2XlhbbATs4PVH3cRPtaee/iqK8wRMcZc+Ul6UfE=
+  app: blog-post-API
+  on:
+    repo: sanvean74/blog-post-API
